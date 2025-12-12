@@ -245,7 +245,7 @@ Assume required classes in the original code are setup correctly, do not include
 
         print("GPT prompt:\n{}".format(gpt_prompt))
         full_response = openai.ChatCompletion.create(
-            model = "gpt-4", #"gpt-3.5-turbo",
+            model = "gpt-5.1", #"gpt-3.5-turbo",
             temperature = 0.2,
             messages = [
                 {"role": "user", 

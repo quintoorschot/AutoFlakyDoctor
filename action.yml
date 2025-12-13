@@ -91,7 +91,7 @@
 #         echo "Running: python3 \"$SCRIPT\""
 #         python3 "$SCRIPT"
 
-# ONLY TEMPORARY FOR TESTING PURPOSES
+# TEMPORARY FOR TESTING PURPOSES
 name: CI/CD FlakyDoctor
 description: GitHub Action for FlakyDoctor
 author: Quint van Oorschot
@@ -100,10 +100,6 @@ inputs:
   openai_api_key:
     description: "OpenAI key (optional if set in env)"
     required: false
-  tests_csv_path:
-    description: "Repo-relative path to predefined tests.csv"
-    required: false
-    default: ".github/workflows/flakydoctor/tests.csv"
 
 runs:
   using: composite
@@ -119,50 +115,28 @@ runs:
       id: locate
       shell: bash
       run: |
-        ROOT="/__w/_actions/quintoorschot/CICD-FlakyDoctor/main"
-        if [ ! -d "$ROOT" ]; then
-          ROOT="${GITHUB_ACTION_PATH:-$PWD}"
-        fi
+        ROOT="${GITHUB_ACTION_PATH}"
         echo "Using action dir: $ROOT"
         echo "root=$ROOT" >> "$GITHUB_OUTPUT"
 
-    - name: Provide predefined tests.csv for FlakyDoctor
+    - name: Generate tests.csv for FlakyDoctor
       shell: bash
+      env:
+        SRC_PATH: src/test/java
       run: |
         set -euo pipefail
+
         ROOT="${{ steps.locate.outputs.root }}"
-        SRC="$GITHUB_WORKSPACE/${{ inputs.tests_csv_path }}"
-        DST="$ROOT/tests.csv"
+        export ACTION_DIR="$ROOT"
+        export SRC_PATH
 
-        if [ ! -f "$SRC" ]; then
-          echo "ERROR: predefined tests.csv not found at: $SRC"
-          exit 1
-        fi
-
-        mkdir -p "$(dirname "$DST")"
-        cp -v "$SRC" "$DST"
-
-    - name: Make workspace alias for script
-      shell: bash
-      run: |
-        set -e
-        ROOT="${{ steps.locate.outputs.root }}"
-        WS="$GITHUB_WORKSPACE"
-        TARGET="$WS/CICD-FlakyDoctor"
-
-        echo "Workspace: $WS"
-        echo "Action root: $ROOT"
-        echo "Target alias: $TARGET"
-
-        rm -rf "$TARGET"
-        mkdir -p "$(dirname "$TARGET")"
-        ln -s "$ROOT" "$TARGET"
-        ls -la "$TARGET/FlakyDoctor/src" || true
+        echo "Generating tests.csv using script in: $ROOT"
+        python3 "$ROOT/.github/workflow-scripts/generate_tests_csv.py"
 
     - name: Run CICD FlakyDoctor
       shell: bash
       run: |
-        set -e
+        set -euo pipefail
         ROOT="${{ steps.locate.outputs.root }}"
         SCRIPT="$ROOT/CICD-FlakyDoctor.py"
 

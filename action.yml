@@ -62,19 +62,19 @@ runs:
         ln -s "$ROOT" "$TARGET"
         ls -la "$TARGET/FlakyDoctor/src" || true
 
-    - name: Generate tests.csv for FlakyDoctor
-      shell: bash
-      env:
-        SRC_PATH: src/test/java
-      run: |
-        set -euo pipefail
-        ROOT="${{ steps.locate.outputs.root }}"
+    # - name: Generate tests.csv for FlakyDoctor
+    #   shell: bash
+    #   env:
+    #     SRC_PATH: src/test/java
+    #   run: |
+    #     set -euo pipefail
+    #     ROOT="${{ steps.locate.outputs.root }}"
 
-        echo "Generating tests.csv in $ROOT"
-        ACTION_DIR="$ROOT"
-        export ACTION_DIR SRC_PATH
+    #     echo "Generating tests.csv in $ROOT"
+    #     ACTION_DIR="$ROOT"
+    #     export ACTION_DIR SRC_PATH
 
-        python3 "$GITHUB_WORKSPACE/.github/workflow-scripts/generate_tests_csv.py"
+    #     python3 "$GITHUB_WORKSPACE/.github/workflow-scripts/generate_tests_csv.py"
 
     - name: Run CICD FlakyDoctor
       shell: bash

@@ -21,7 +21,7 @@ runs:
       shell: bash
       run: |
         set -euo pipefail
-        CSV="${FLAKYDOCTOR_TESTS_CSV:-$GITHUB_WORKSPACE/flakydoctor/tests.csv}"
+        CSV="${FLAKYDOCTOR_TESTS_CSV:-$GITHUB_WORKSPACE/.github/flakydoctor/tests.csv}"
 
         if [ ! -f "$CSV" ]; then
           echo "ERROR: tests.csv not found at $CSV"

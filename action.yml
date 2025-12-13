@@ -10,7 +10,6 @@ inputs:
 runs:
   using: composite
   steps:
-
     - name: Export API key
       shell: bash
       run: |
@@ -18,75 +17,23 @@ runs:
           echo "OPENAI_API_KEY=${{ inputs.openai_api_key }}" >> "$GITHUB_ENV"
         fi
 
-    - name: Locate action directory
-      id: locate
+    - name: Verify predefined tests.csv
       shell: bash
       run: |
-        ROOT="/__w/_actions/quintoorschot/CICD-FlakyDoctor/main"
-        if [ ! -d "$ROOT" ]; then
-          ROOT="${GITHUB_ACTION_PATH:-$PWD}"
+        set -euo pipefail
+        CSV="${FLAKYDOCTOR_TESTS_CSV:-$GITHUB_WORKSPACE/flakydoctor/tests.csv}"
+
+        if [ ! -f "$CSV" ]; then
+          echo "ERROR: tests.csv not found at $CSV"
+          ls -la "$GITHUB_WORKSPACE/flakydoctor" || true
+          exit 1
         fi
-        echo "Using action dir: $ROOT"
-        echo "root=$ROOT" >> "$GITHUB_OUTPUT"
 
-    - name: Generate tests.csv for FlakyDoctor
-      shell: bash
-      env:
-        SRC_PATH: src/test/java
-      run: |
-        set -euo pipefail
-
-        ROOT="${{ steps.locate.outputs.root }}"
-        ACTION_DIR="$ROOT"
-        export ACTION_DIR SRC_PATH
-
-        echo "Generating tests.csv in $ACTION_DIR"
-
-        python3 "$GITHUB_WORKSPACE/.github/workflow-scripts/generate_tests_csv.py"
-
-    - name: Make workspace alias for script
-      shell: bash
-      run: |
-        set -e
-        ROOT="${{ steps.locate.outputs.root }}"
-        WS="$GITHUB_WORKSPACE"
-        TARGET="$WS/CICD-FlakyDoctor"
-
-        echo "Workspace: $WS"
-        echo "Action root: $ROOT"
-        echo "Target alias: $TARGET"
-
-        rm -rf "$TARGET"
-        mkdir -p "$(dirname "$TARGET")"
-        ln -s "$ROOT" "$TARGET"
-        ls -la "$TARGET/FlakyDoctor/src" || true
-
-    - name: Generate tests.csv for FlakyDoctor
-      shell: bash
-      env:
-        SRC_PATH: src/test/java
-      run: |
-        set -euo pipefail
-        ROOT="${{ steps.locate.outputs.root }}"
-
-        echo "Generating tests.csv in $ROOT"
-        ACTION_DIR="$ROOT"
-        export ACTION_DIR SRC_PATH
-
-        python3 "$GITHUB_WORKSPACE/.github/workflow-scripts/generate_tests_csv.py"
+        echo "Using tests.csv at: $CSV"
+        echo "FLAKYDOCTOR_TESTS_CSV=$CSV" >> "$GITHUB_ENV"
 
     - name: Run CICD FlakyDoctor
       shell: bash
       run: |
-        set -e
-        ROOT="${{ steps.locate.outputs.root }}"
-        SCRIPT="$ROOT/CICD-FlakyDoctor.py"
-
-        if [ ! -f "$SCRIPT" ]; then
-          echo "ERROR: $SCRIPT not found in $ROOT"
-          ls -la "$ROOT"
-          exit 1
-        fi
-
-        echo "Running: python3 \"$SCRIPT\""
-        python3 "$SCRIPT"
+        set -euo pipefail
+        python3 "$GITHUB_ACTION_PATH/CICD-FlakyDoctor.py"

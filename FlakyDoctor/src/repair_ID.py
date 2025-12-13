@@ -229,6 +229,19 @@ But if you didn't find above similar cases, you should fix by other ways, to mak
 Lines {} cause the flakiness. Lines {} may cause potential flakiness. {}.
 Follow steps below, I want you to only reply with all code inside one unique code block, do not write anything else.
 do not write explanations. do not put original method in your answer.
+- This project uses JUnit 5 (JUnit Jupiter) ONLY.
+- DO NOT use JUnit 4.
+- DO NOT import or reference any of these:
+  - org.junit.Assert
+  - org.junit.Test
+  - org.junit.Before / After / BeforeClass / AfterClass
+  - junit.framework.*
+- ALWAYS use JUnit 5 equivalents when needed:
+  - org.junit.jupiter.api.Test
+  - org.junit.jupiter.api.BeforeEach / AfterEach / BeforeAll / AfterAll
+  - org.junit.jupiter.api.Assertions (or static org.junit.jupiter.api.Assertions.*)
+- Do not add JUnit 4 dependencies to pom.xml. Do not change the test framework version.
+- Output must compile under JUnit 5 without adding new test-framework dependencies.
 1) Fix the flakiness and print the fixed complete method code of this test between //<fix start> and //<fix end>.
     Your code should be compilable without any errors.
     Make sure all the arguments are correct.

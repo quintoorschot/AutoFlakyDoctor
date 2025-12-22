@@ -13,18 +13,14 @@ runs:
         set -euo pipefail
         echo "root=${GITHUB_ACTION_PATH:-$PWD}" >> "$GITHUB_OUTPUT"
 
-    - name: Make workspace alias for script
+    - name: Link action into workspace
       shell: bash
       run: |
-        set -e
+        set -euo pipefail
         ROOT="${{ steps.locate.outputs.root }}"
-        WS="$GITHUB_WORKSPACE"
-        TARGET="$WS/CICD-FlakyDoctor"
-
+        TARGET="$GITHUB_WORKSPACE/CICD-FlakyDoctor"
         rm -rf "$TARGET"
-        mkdir -p "$(dirname "$TARGET")"
         ln -s "$ROOT" "$TARGET"
-        ls -la "$TARGET/FlakyDoctor/src" || true
 
     - name: Generate tests.csv for FlakyDoctor
       shell: bash

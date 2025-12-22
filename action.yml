@@ -10,11 +10,8 @@ runs:
       id: locate
       shell: bash
       run: |
-        ROOT="/__w/_actions/quintoorschot/CICD-FlakyDoctor/main"
-        if [ ! -d "$ROOT" ]; then
-          ROOT="${GITHUB_ACTION_PATH:-$PWD}"
-        fi
-        echo "root=$ROOT" >> "$GITHUB_OUTPUT"
+        set -euo pipefail
+        echo "root=${GITHUB_ACTION_PATH:-$PWD}" >> "$GITHUB_OUTPUT"
 
     - name: Make workspace alias for script
       shell: bash

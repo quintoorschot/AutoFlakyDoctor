@@ -29,9 +29,7 @@ for file in "${flakies[@]}"; do
     save_dir=${DIR}
     details_json=${DIR}/${model}_test_details_${SubTimeStamp}.json
 
-    python3 -u src/flakydoctor.py --input-tests-csv /__w/commons-lang/commons-lang/.github/flakydoctor/tests.csv --projects ${clone_dir} --openai-key ${api_key} --model ${model} --nondex-times ${nondex_times} --output-dir ${save_dir} --output-result-csv ${result_csv} --output-result-json ${result_json} --output-details-json ${details_json} --flakiness-type ${flakiness_type}
-    # PUT THIS LINE BACK; ONLY TEMPORARILY COMMENTED FOR TESTING PURPOSES
-    # python3 -u src/flakydoctor.py --input-tests-csv ${file} --projects ${clone_dir} --openai-key ${api_key} --model ${model} --nondex-times ${nondex_times} --output-dir ${save_dir} --output-result-csv ${result_csv} --output-result-json ${result_json} --output-details-json ${details_json} --flakiness-type ${flakiness_type}
+    python3 -u src/flakydoctor.py --input-tests-csv ${file} --projects ${clone_dir} --openai-key ${api_key} --model ${model} --nondex-times ${nondex_times} --output-dir ${save_dir} --output-result-csv ${result_csv} --output-result-json ${result_json} --output-details-json ${details_json} --flakiness-type ${flakiness_type}
 done
 
 echo "* "ENDING at $(date)

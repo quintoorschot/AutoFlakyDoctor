@@ -11,13 +11,6 @@ runs:
   using: composite
   steps:
 
-    - name: Export API key
-      shell: bash
-      run: |
-        if [ -n "${{ inputs.openai_api_key }}" ]; then
-          echo "OPENAI_API_KEY=${{ inputs.openai_api_key }}" >> "$GITHUB_ENV"
-        fi
-
     - name: Locate action directory
       id: locate
       shell: bash
@@ -28,21 +21,6 @@ runs:
         fi
         echo "Using action dir: $ROOT"
         echo "root=$ROOT" >> "$GITHUB_OUTPUT"
-
-    - name: Generate tests.csv for FlakyDoctor
-      shell: bash
-      env:
-        SRC_PATH: src/test/java
-      run: |
-        set -euo pipefail
-
-        ROOT="${{ steps.locate.outputs.root }}"
-        ACTION_DIR="$ROOT"
-        export ACTION_DIR SRC_PATH
-
-        echo "Generating tests.csv in $ACTION_DIR"
-
-        python3 "$GITHUB_WORKSPACE/.github/workflow-scripts/generate_tests_csv.py"
 
     - name: Make workspace alias for script
       shell: bash

@@ -36,18 +36,9 @@ runs:
 
         python3 "$GITHUB_WORKSPACE/.github/workflow-scripts/generate_tests_csv.py"
 
-    - name: Run CICD FlakyDoctor
+    - name: Run FlakyDoctor
       shell: bash
       run: |
-        set -e
+        set -euo pipefail
         ROOT="${{ steps.locate.outputs.root }}"
-        SCRIPT="$ROOT/CICD-FlakyDoctor.py"
-
-        if [ ! -f "$SCRIPT" ]; then
-          echo "ERROR: $SCRIPT not found in $ROOT"
-          ls -la "$ROOT"
-          exit 1
-        fi
-
-        echo "Running: python3 \"$SCRIPT\""
-        python3 "$SCRIPT"
+        python3 "$ROOT/CICD-FlakyDoctor.py"

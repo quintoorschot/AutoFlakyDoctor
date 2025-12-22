@@ -2,11 +2,6 @@ name: CI/CD FlakyDoctor
 description: GitHub Action for FlakyDoctor
 author: Quint van Oorschot
 
-inputs:
-  openai_api_key:
-    description: "OpenAI key (optional if set in env)"
-    required: false
-
 runs:
   using: composite
   steps:
@@ -19,7 +14,6 @@ runs:
         if [ ! -d "$ROOT" ]; then
           ROOT="${GITHUB_ACTION_PATH:-$PWD}"
         fi
-        echo "Using action dir: $ROOT"
         echo "root=$ROOT" >> "$GITHUB_OUTPUT"
 
     - name: Make workspace alias for script
@@ -29,10 +23,6 @@ runs:
         ROOT="${{ steps.locate.outputs.root }}"
         WS="$GITHUB_WORKSPACE"
         TARGET="$WS/CICD-FlakyDoctor"
-
-        echo "Workspace: $WS"
-        echo "Action root: $ROOT"
-        echo "Target alias: $TARGET"
 
         rm -rf "$TARGET"
         mkdir -p "$(dirname "$TARGET")"

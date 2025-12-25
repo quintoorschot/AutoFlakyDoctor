@@ -1,9 +1,9 @@
-# 🚀 FlakyDoctor CI/CD
+# 🚀 AutoFlakyDoctor
 
 Integrate FlakyDoctor into the CI/CD pipeline to automatically detect and fix flaky tests.
 
 ### ⚠️ Note:
-The current implementation of FlakyDoctor CI/CD only aims to detect and patch implementation-dependent (ID) flakiness in test suites.
+The current implementation of AutoFlakyDoctor only aims to detect and patch implementation-dependent (ID) flakiness in test suites.
 
 ### 🧩 Prerequisites
 
@@ -15,7 +15,7 @@ This integration requires the following:
 - **🤖 OpenAI API Key**: Required for accessing OpenAI services
 
 ### ⚙️ Installation
-[FlakyDoctor CI/CD](https://github.com/quintoorschot/CICD-FlakyDoctor) is directly usable in your [GitHub Actions workflows](https://docs.github.com/en/actions/how-tos/write-workflows), no local setup required.
+[AutoFlakyDoctor](https://github.com/quintoorschot/AutoFlakyDoctor) is directly usable in your [GitHub Actions workflows](https://docs.github.com/en/actions/how-tos/write-workflows), no local setup required.
 
 #### 1. Add OpenAI secret key to your GitHub repository
 
@@ -121,8 +121,6 @@ public class AppTest {
 }
 ```
 
-Additionaly to the PR, FlakyDoctor CI/CD also produces an artifact containing the logs of the entire FlakyDoctor process.
-
 ### 📚 Reference
 
 This work is part of my **Bachelor's Thesis in Computer Science** at [Radboud University](https://www.ru.nl/) in collaboration with [Sogeti](https://www.sogeti.nl/) (part of [Capgemini](https://www.capgemini.com)).
@@ -137,7 +135,7 @@ For citing FlakyDoctor CI/CD and the corresponding paper, you can use:
 ```
 @misc{vanoorschot2025flakydoctor,
   author       = {Quint van Oorschot},
-  title        = {FlakyDoctor CI/CD: Automated Detection and Repair of Flaky Tests},
+  title        = {AutoFlakyDoctor: A Neuro-Symbolic Approach to Detecting and Patching Flaky Tests in CI/CD Pipelines},
   year         = {2025},
   howpublished = {\url{https://github.com/quintoorschot/CICD-FlakyDoctor}}
 }

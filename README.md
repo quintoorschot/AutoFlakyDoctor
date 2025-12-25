@@ -137,7 +137,7 @@ For citing FlakyDoctor CI/CD and the corresponding paper, you can use:
   author       = {Quint van Oorschot},
   title        = {AutoFlakyDoctor: A Neuro-Symbolic Approach to Detecting and Patching Flaky Tests in CI/CD Pipelines},
   year         = {2025},
-  howpublished = {\url{https://github.com/quintoorschot/CICD-FlakyDoctor}}
+  howpublished = {\url{https://github.com/quintoorschot/AutoFlakyDoctor}}
 }
 ```
 

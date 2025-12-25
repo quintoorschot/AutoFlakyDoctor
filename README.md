@@ -42,8 +42,7 @@ Copy the [FlakyDoctor action](https://github.com/quintoorschot/FlakyDoctor-Workf
 Or run this command in the root of your target folder:<br>
 ```sh
 mkdir -p .github/workflows
-curl -fsSL https://raw.githubusercontent.com/quintoorschot/FlakyDoctor-Workflow/main/flakydoctor.yml \
-  | tail -n +4 > .github/workflows/action.yml
+curl -fsSL https://raw.githubusercontent.com/quintoorschot/FlakyDoctor-Workflow/main/flakydoctor.yml > .github/workflows/action.yml
 
 ```
 

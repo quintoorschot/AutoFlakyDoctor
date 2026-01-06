@@ -1,9 +1,9 @@
-# 🚀 FlakyDoctor CI/CD
+# 🚀 AutoFlakyDoctor
 
-Integrate FlakyDoctor into the CI/CD pipeline to automatically detect and fix flaky tests.
+Integrate FlakyDoctor into the CI pipeline to automatically detect and fix flaky tests.
 
 ### ⚠️ Note:
-The current implementation of FlakyDoctor CI/CD only aims to detect and patch implementation-dependent (ID) flakiness in test suites.
+The current implementation of AutoFlakyDoctor only aims to detect and patch implementation-dependent (ID) flakiness in test suites.
 
 ### 🧩 Prerequisites
 
@@ -86,7 +86,7 @@ public class AppTest {
 }
 
 ```
-When this code is pushed to the repository or included in a pull request, FlakyDoctor CI/CD automatically runs as part of the workflow (if correctly configured).<br>
+When this code is pushed to the repository or included in a pull request, AutoFlakyDoctor automatically runs as part of the workflow (if correctly configured).<br>
 It analyzes the test suite, detects flaky behavior, and tries to generate a patch to make the tests deterministic.
 
 FlakyDoctor creates a new PR where the flaky test shown above is patched as:
@@ -121,7 +121,7 @@ public class AppTest {
 }
 ```
 
-Additionaly to the PR, FlakyDoctor CI/CD also produces an artifact containing the logs of the entire FlakyDoctor process.
+Additionaly to the PR, AutoFlakyDoctor also produces an artifact containing the logs of the entire FlakyDoctor process.
 
 ### 📚 Reference
 
@@ -133,7 +133,7 @@ Based on the paper *“Neurosymbolic Repair of Test Flakiness”* (ISSTA 2024) b
 - 💻 [FlakyDoctor Repository](https://github.com/Intelligent-CAT-Lab/FlakyDoctor)
 
 ### 🧠 Citation
-For citing FlakyDoctor CI/CD and the corresponding paper, you can use:
+For citing AutoFlakyDoctor and the corresponding paper, you can use:
 ```
 @misc{vanoorschot2025flakydoctor,
   author       = {Quint van Oorschot},

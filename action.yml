@@ -1,4 +1,4 @@
-name: CI/CD FlakyDoctor
+name: AutoFlakyDoctor
 description: GitHub Action for FlakyDoctor
 author: Quint van Oorschot
 

@@ -15,7 +15,7 @@ This integration requires the following:
 - **🤖 OpenAI API Key**: Required for accessing OpenAI services
 
 ### ⚙️ Installation
-[FlakyDoctor CI/CD](https://github.com/quintoorschot/CICD-FlakyDoctor) is directly usable in your [GitHub Actions workflows](https://docs.github.com/en/actions/how-tos/write-workflows), no local setup required.
+[FlakyDoctor CI/CD](https://github.com/quintoorschot/CICD-FlakyDoctor) is directly usable in your [GitHub Actions workflows](https://docs.github.com/en/actions/how-tos/write-workflows), minimal local setup is required.
 
 #### 1. Add OpenAI secret key to your GitHub repository
 

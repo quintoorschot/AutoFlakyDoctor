@@ -126,7 +126,7 @@ Additionaly to the PR, AutoFlakyDoctor also produces an artifact containing the 
 ### 📚 Reference
 
 This work is part of my **Bachelor's Thesis in Computer Science** at [Radboud University](https://www.ru.nl/) in collaboration with [Sogeti](https://www.sogeti.nl/) (part of [Capgemini](https://www.capgemini.com)).
-- 📝 *My Thesis Paper*: *(to be added)* 
+- 📝 [My Thesis Paper](https://www.cs.ru.nl/bachelors-theses/2026/Quint_van_Oorschot___1098812___AutoFlakyDoctor_-_A_Neuro-Symbolic_Approach_to_Detecting_and_Patching_Flaky_Tests_in_CI_Pipelines.pdf) 
 
 Based on the paper *“Neurosymbolic Repair of Test Flakiness”* (ISSTA 2024) by **Yang Chan et al.**  
 - 📄 [ACM Paper](https://dl.acm.org/doi/10.1145/3650212.3680369)  
